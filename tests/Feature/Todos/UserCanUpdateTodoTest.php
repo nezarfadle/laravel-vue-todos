@@ -3,6 +3,7 @@
 namespace Tests\Feature\Todos;
 
 use Tests\TestCase;
+use Illuminate\Http\Response;
 use Todos\Models\Todo;
 use Tests\Traits\CreateUser;
 
@@ -24,8 +25,25 @@ class UserCanUpdateTodoTest extends TestCase
  		
  		$res = $this->put( 'todos/1', $data );
  		
+ 		$res->assertStatus( Response::HTTP_NO_CONTENT );
  		$this->assertDatabaseHas( 'todos', [ 'title' => 'todo 2'] );
  		$this->assertDatabaseMissing( 'todos', [ 'title' => 'todo 1'] );
 
+    }
+
+    public function test_invalid_request_should_fail()
+    {
+		factory(Todo::class)->create( [ 'id' => 1, 'title' => 'todo 1' ] );   	    
+ 		$data = [
+ 			'title' => ''
+ 		];
+
+ 		$this->assertDatabaseHas( 'todos', [ 'title' => 'todo 1'] );
+ 		
+ 		$res = $this->put( 'todos/1', $data );
+ 		
+ 		$res->assertStatus( Response::HTTP_UNPROCESSABLE_ENTITY	 );
+ 		$this->assertDatabaseHas( 'todos', [ 'title' => 'todo 1'] );
+ 		
     }
 }
