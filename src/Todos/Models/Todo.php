@@ -9,4 +9,10 @@ class Todo extends Model
     protected $fillable = [
     	'title', 'complete', 'user_id'
     ];
+
+    public function getUrl()
+    {
+    	return "todos/$this->id";
+    }
+
 }

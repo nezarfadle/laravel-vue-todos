@@ -11,6 +11,7 @@ trait Todosable
 	{
 		return $this->hasMany( Todo::class );
 	}
+
 	public function addTodo( $title )
 	{
 		return $this->todos()->create( [ 
@@ -18,5 +19,13 @@ trait Todosable
 			'complete' 	=> false,
 			'user_id'	=> $this->id,
 		]);
+	}
+
+	public function deleteTodo($id)
+	{
+		return $this->todos()
+			->where( 'id', $id )
+			->where( 'user_id', $this->id )
+			->delete();
 	}
 }

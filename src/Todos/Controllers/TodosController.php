@@ -4,6 +4,8 @@ namespace Todos\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
+use SharedKernel\Http\CreatedJsonResponse;
+use SharedKernel\Http\NoContentJsonResponse;
 use Todos\Requests\CreateTodoRequest;
 use App\User;
 
@@ -23,13 +25,29 @@ class TodosController extends Controller
 		
 		try {
 		    
-		    $user->addTodo( $title );
-		    return new JsonResponse( [], 201 );
+		    $todo = $user->addTodo( $title );
+		    return new CreatedJsonResponse( 200, $todo->getUrl() );
 
     	} catch (\Exception $e) {
 
-		    return new JsonResponse( [], 500 );
+            return new JsonInternalServerError( 200 );
 
     	}    	
+    }
+
+    public function destroy( $id )
+    {
+
+    	try {
+    		
+    		$user = auth()->user();
+    		$user->deleteTodo($id);
+    		return new NoContentJsonResponse();
+
+    	} catch (\Exception $e) {
+
+            return new JsonInternalServerError( 201 );
+
+    	}
     }
 }

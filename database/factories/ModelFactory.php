@@ -25,12 +25,12 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 
 
-$factory->define(Todos\Models\Todo::class, function (Faker\Generator $faker) {
+$factory->define( Todos\Models\Todo::class, function (Faker\Generator $faker) {
 
     return [
-        'name' => $faker->sentence,
+        'title' => $faker->sentence,
         'complete' => $faker->boolean,
-        'user_id' => factory(App\User::class)->craete()->id
+        'user_id' => 1
     ];
 
 });

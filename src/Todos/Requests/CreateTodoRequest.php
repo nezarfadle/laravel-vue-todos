@@ -3,6 +3,7 @@
 namespace Todos\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 
 class CreateTodoRequest extends FormRequest
@@ -31,6 +32,6 @@ class CreateTodoRequest extends FormRequest
 
     public function response(array $errors)
     {
-        return new JsonResponse( $errors, 422 );
+        return new JsonResponse( $errors, Response::HTTP_UNPROCESSABLE_ENTITY );
     }
 }

@@ -3,6 +3,7 @@
 namespace Tests\Feature\Todos;
 
 use Tests\TestCase;
+use Illuminate\Http\Response;
 use Tests\Traits\CreateUser;
 use Todos\Models\Todo;
 
@@ -25,7 +26,14 @@ class UserCanCreateTodoTest extends TestCase
     	$this->assertDatabaseMissing( 'todos', $dbData );
         $res = $this->post('todos', $data);
 
-        $res->assertStatus( 201 );
+        $res->assertStatus( Response::HTTP_CREATED );
+        $res->assertJson([
+            "code" => "200",
+            "status" => "created",
+            "links" => [
+                'href' => env('APP_URL') . 'todos/1'
+            ]
+        ]);
     	$this->assertDatabaseHas( 'todos', $dbData );
 
     }
@@ -39,7 +47,7 @@ class UserCanCreateTodoTest extends TestCase
 
         $this->assertEquals( 0, Todo::count() );
         $res = $this->post( 'todos', $data );
-        $res->assertStatus( 422 );
+        $res->assertStatus( Response::HTTP_UNPROCESSABLE_ENTITY );
         $this->assertEquals( 0, Todo::count() );
 
     }

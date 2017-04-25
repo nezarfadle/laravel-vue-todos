@@ -14,6 +14,7 @@ trait CreateUser
 
 	public function setup()
     {
+
     	parent::setup();
     	$testName = str_replace(["test", "_"], ["", " "], $this->getName());
     	$testName = preg_replace_callback("/[a-zA-Z0-9]{3,}\b/", function($match){
@@ -22,7 +23,7 @@ trait CreateUser
 
     	dump(" ->" . $testName);
 
-    	factory(User::class)->create();
+    	factory(User::class)->create( [ 'id' => 1 ] );
     	\Auth::loginUsingId(1);
     }
 }
