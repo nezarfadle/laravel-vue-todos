@@ -31,7 +31,7 @@ class UserCanUpdateTodoTest extends TestCase
 
     }
 
-    public function test_invalid_request_should_fail()
+    public function test_invalid_request_to_update_todo_should_fail()
     {
 		factory(Todo::class)->create( [ 'id' => 1, 'title' => 'todo 1' ] );   	    
  		$data = [

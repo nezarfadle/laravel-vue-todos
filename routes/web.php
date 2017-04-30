@@ -1,7 +1,7 @@
 <?php
 
 
-Route::get('/todos/create', '\Todos\Controllers\TodosController@create');
+Route::get('/todos/landing', '\Todos\Controllers\TodosController@landing');
 Route::get('/todos', '\Todos\Controllers\TodosController@index');
 Route::post('/todos', '\Todos\Controllers\TodosController@store');
 Route::delete('/todos/{id}', '\Todos\Controllers\TodosController@destroy');

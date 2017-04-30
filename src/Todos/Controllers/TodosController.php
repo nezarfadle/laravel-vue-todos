@@ -8,6 +8,8 @@ use SharedKernel\Http\CreatedJsonResponse;
 use SharedKernel\Http\NoContentJsonResponse;
 use Todos\Requests\CreateTodoRequest;
 use App\User;
+use \Todos\Queries\GetTweetsQuery;
+
 
 class TodosController extends Controller
 {
@@ -16,6 +18,11 @@ class TodosController extends Controller
 	{
 		return view("todos::landing");	
 	}
+
+    public function index(GetTweetsQuery $query)
+    {
+        return $query->get();
+    }
 
     public function store(CreateTodoRequest $req)
     {

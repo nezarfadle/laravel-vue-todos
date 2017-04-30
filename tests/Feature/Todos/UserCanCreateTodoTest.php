@@ -39,7 +39,7 @@ class UserCanCreateTodoTest extends TestCase
     }
 
 
-    public function test_invalid_request_should_fail()
+    public function test_invalid_request_to_create_todo_should_fail()
     {
         $data = [
             'title' => ''

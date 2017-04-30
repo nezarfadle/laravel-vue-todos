@@ -1,3 +1,17 @@
+<style type="text/css">
+/*
+.text-todo {
+	padding: 10px;
+	width: 100%;
+	border: 0px;
+}
+
+.text-todo:focus {
+	background-color: #f0f4c3;
+	border: 1px;
+}
+*/
+</style>
 @extends('layout')
 @section('content')
 
@@ -9,28 +23,23 @@
 </header>
 
 <!-- This section should be hidden by default and shown when there are todos -->
-<section class="main">
+<section class="main" id="app">
 	<input class="toggle-all" type="checkbox">
 	<label for="toggle-all">Mark all as complete</label>
 	<ul class="todo-list">
-		<!-- These are here just to show the structure of the list items -->
-		<!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
-		<li class="completed">
-			<div class="view">
+		
+		<li class="completed" v-for="todo in todos">
+
+			<todo-tile :todo="todo"></todo-tile>
+			{{-- <div class="view">
 				<input class="toggle" type="checkbox" checked>
-				<label>Taste JavaScript</label>
+				<label>
+					<input type="text" class="text-todo" v-model="todo.title">
+				</label>
 				<button class="destroy"></button>
-			</div>
-			<input class="edit" value="Create a TodoMVC template">
+			</div> --}}
 		</li>
-		<li>
-			<div class="view">
-				<input class="toggle" type="checkbox">
-				<label>Buy a unicorn</label>
-				<button class="destroy"></button>
-			</div>
-			<input class="edit" value="Rule the web">
-		</li>
+		
 	</ul>
 </section>
 <!-- This footer should hidden by default and shown when there are todos -->
@@ -61,10 +70,6 @@ Template on Github
 </a>
 </p>
 </footer>
-
-<div id="app">
-
-</div>
 
 @endsection
 
