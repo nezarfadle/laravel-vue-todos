@@ -53,4 +53,36 @@ class UserCanCreateTodoTest extends TestCase
 
     }
 
+    public function test_user_caanot_assign_a_new_todo_to_other_user()
+    {
+        factory(\App\User::class)->create( [ 'id' => 2 ] );         
+        
+        $todoTitle = 'todo 1';
+        $data = [
+            'title' => $todoTitle,
+            'user_id' => 2
+        ];
+
+        $dbData = [
+            'title'     => $todoTitle,
+            'user_id'   => 1,
+        ];
+
+        $this->assertDatabaseMissing( 'todos', $dbData );
+        $res = $this->post('todos', $data);
+
+        $res->assertStatus( Response::HTTP_CREATED );
+        $res->assertJson([
+            "id" => 1,
+            "code" => "200",
+            "status" => "created",
+            "links" => [
+                'href' => env('APP_URL') . 'todos/1'
+            ]
+        ]);
+        $this->assertDatabaseHas( 'todos', $dbData );
+        $this->assertDatabaseMissing( 'todos', [ 'title' => $todoTitle, 'user_id' => 2 ] );
+        
+    }
+
 }

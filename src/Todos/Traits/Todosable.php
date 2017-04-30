@@ -16,8 +16,7 @@ trait Todosable
 	{
 		return $this->todos()->create( [ 
 			'title' 	=> $title,
-			'complete' 	=> false,
-			'user_id'	=> $this->id,
+			'complete' 	=> false
 		]);
 	}
 
@@ -29,15 +28,9 @@ trait Todosable
 			->delete();
 	}
 
-	// public function updateTodo($id, $title)
-	public function updateTodo($id, $all)
+	public function updateTodo($id, $data)
 	{
-		return $this->todos()
-					 ->where( 'id', $id )
-					 ->where( 'user_id', $this->id )
-					 // ->update([ 'title' => $title ]);
-					 ->update($all);
-		
-		
+		$todo = $this->todos()->where( 'id', $id )->first();
+		return $todo->fill($data)->update();	
 	}
 }
