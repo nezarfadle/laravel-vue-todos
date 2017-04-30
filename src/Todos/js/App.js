@@ -94,15 +94,18 @@ new Vue({
       		})
       	},
 
-      	filterAll: function() {
+      	filterAll: function(e) {
+      		e.preventDefault();
       		this.visibility = 'all';
       	},
 
-      	filterActive: function() {
+      	filterActive: function(e) {
+      		e.preventDefault();
 	    	this.visibility = 'active';
 	    },
 
-	    filterCompleted: function() {
+	    filterCompleted: function(e) {
+	    	e.preventDefault();
 	    	this.visibility = 'completed';
 	    }
 

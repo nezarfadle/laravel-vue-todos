@@ -41,13 +41,19 @@
 	<!-- Remove this if you don't implement routing -->
 	<ul class="filters">
 		<li>
-			<a class="selected" href="#/" @click="filterAll">All</a>
+			<a :class="{ selected: visibility == 'all' }"
+			   href="#" @click="filterAll($event)"
+			>All</a>
 		</li>
 		<li>
-			<a href="#/active" @click="filterActive">Active</a>
+			<a href="#" 
+			   :class="{ selected: visibility == 'active' }"
+			   @click="filterActive($event)">Active</a>
 		</li>
 		<li>
-			<a href="#/completed" @click="filterCompleted">Completed</a>
+			<a href="#" 
+			   :class="{ selected: visibility == 'completed' }"
+			   @click="filterCompleted($event)">Completed</a>
 		</li>
 	</ul>
 	<!-- Hidden if no completed items are left ↓ -->
