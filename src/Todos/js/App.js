@@ -3,11 +3,29 @@ import TodoComponent from './TodoComponent.vue';
 
 Vue.component('todo-tile', TodoComponent);
 
+// visibility filters
+var filters = {
+  all: function (todos) {
+    return todos
+  },
+  active: function (todos) {
+    return todos.filter(function (todo) {
+      return !todo.complete
+    })
+  },
+  completed: function (todos) {
+    return todos.filter(function (todo) {
+      return todo.complete
+    })
+  }
+}
+
 new Vue({
 	el: '#app',
 	data: {
 		todo: '',
-		todos: []
+		todos: [],
+		visibility: 'all'
 	},
 	created: function(){
     		
@@ -20,7 +38,6 @@ new Vue({
         }
         
         this.$bus.$on('todo-state-changed', todo => {
-        	// alert('Send an ajax request to change the state ' + todo.complete );
         	this.update( todo );
         })
         
@@ -39,6 +56,10 @@ new Vue({
     },
 
     computed: {
+
+    	filteredTodos: function () {
+	      return filters[this.visibility](this.todos)
+	    },
     	activeItems: function() {
     		return this.todos.filter( (todo) => {
     			return !todo.complete;
@@ -48,12 +69,12 @@ new Vue({
     methods: {
     	add: function() {
     		
-    		var data = {
+    		let todo = {
     			title: this.todo,
     			complete: false
     		};
 
-    		this.$http.post('/todos', data).then( function(res){
+    		this.$http.post('/todos', todo).then( function(res){
     			let newTodoId = res.data.id;
 	        	this.addTodo( newTodoId, this.todo );
 	        	this.todo = '';
@@ -71,7 +92,20 @@ new Vue({
       			let index = this.todos.indexOf(todo);
       			this.todos.splice( index, 1 );
       		})
-      	}
+      	},
+
+      	filterAll: function() {
+      		this.visibility = 'all';
+      	},
+
+      	filterActive: function() {
+	    	this.visibility = 'active';
+	    },
+
+	    filterCompleted: function() {
+	    	this.visibility = 'completed';
+	    }
+
     }
 
 })

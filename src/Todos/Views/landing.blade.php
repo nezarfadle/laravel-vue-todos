@@ -28,7 +28,7 @@
 	<label for="toggle-all">Mark all as complete</label>
 	<ul class="todo-list">
 		
-		<li class="completed" v-for="todo in todos">
+		<li class="completed" v-for="todo in filteredTodos">
 			<todo-tile :todo="todo"></todo-tile>
 		</li>
 		
@@ -37,17 +37,17 @@
 <!-- This footer should hidden by default and shown when there are todos -->
 <footer class="footer">
 	<!-- This should be `0 items left` by default -->
-	<span class="todo-count"><strong>@{{activeItems}}</strong> item left</span>
+	<span class="todo-count"><strong>@{{activeItems}}</strong> item(s) left</span>
 	<!-- Remove this if you don't implement routing -->
 	<ul class="filters">
 		<li>
-			<a class="selected" href="#/">All</a>
+			<a class="selected" href="#/" @click="filterAll">All</a>
 		</li>
 		<li>
-			<a href="#/active">Active</a>
+			<a href="#/active" @click="filterActive">Active</a>
 		</li>
 		<li>
-			<a href="#/completed">Completed</a>
+			<a href="#/completed" @click="filterCompleted">Completed</a>
 		</li>
 	</ul>
 	<!-- Hidden if no completed items are left ↓ -->
