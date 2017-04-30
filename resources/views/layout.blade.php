@@ -11,6 +11,7 @@
 		
 		@yield('content')
 		<script src="{{asset('js/vendors.min.js')}}"></script>
+		@include('laravel')
 		@yield('js')
 		
 	</body>

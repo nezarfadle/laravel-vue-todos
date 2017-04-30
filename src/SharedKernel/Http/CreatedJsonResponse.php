@@ -9,10 +9,11 @@ class CreatedJsonResponse extends JsonResponse
 {
 
 
-	public function __construct( $codeId, $resourceUrl )
+	public function __construct( $id, $codeId, $resourceUrl )
 	{
 		$data['code'] 	  = $codeId;
 		$data['status']   = 'created';
+		$data['id'] 	  = $id;
 		$data['links']    = [
 			'href' => env('APP_URL') . $resourceUrl
 		];

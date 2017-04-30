@@ -1,4 +1,4 @@
-import {} from './bootstrap';
+import {} from './Bootstrap';
 import TodoComponent from './TodoComponent.vue';
 
 Vue.component('todo-tile', TodoComponent);
@@ -6,26 +6,72 @@ Vue.component('todo-tile', TodoComponent);
 new Vue({
 	el: '#app',
 	data: {
-		todos: [ { title: 'Todo 1'}, { title: 'Todo 2'} ]
+		todo: '',
+		todos: []
 	},
 	created: function(){
     		
-        this.makeTodo = title => {
-          return { title: title, complete: false };
+        this.makeTodo = (id, title) => {
+          return { id: id, title: title, complete: false };
         },
         
-        this.addTodo = title => {
-        	if( title ) this.todos.push( this.makeTodo(title) );  	
+        this.addTodo = (id, title) => {
+        	if( title ) this.todos.push( this.makeTodo(id, title) );  	
         }
         
         this.$bus.$on('todo-state-changed', todo => {
-        	alert('Send an ajax request to change the state ' + todo.complete );
+        	// alert('Send an ajax request to change the state ' + todo.complete );
+        	this.update( todo );
         })
         
         this.$bus.$on('todo-title-changed', todo => {
-        	alert('Send an ajax request to change the title ' + todo.title);
+        	this.update( todo );
+        })
+
+        this.$bus.$on('todo-delete', todo => {
+        	this.deleteTodo( todo );
         })
         
+        this.$http.get('/todos').then( function(res){
+        	this.todos = res.data.data;
+        })
+
+    },
+
+    computed: {
+    	activeItems: function() {
+    		return this.todos.filter( (todo) => {
+    			return !todo.complete;
+    		}).length;
+    	}
+    },
+    methods: {
+    	add: function() {
+    		
+    		var data = {
+    			title: this.todo,
+    			complete: false
+    		};
+
+    		this.$http.post('/todos', data).then( function(res){
+    			let newTodoId = res.data.id;
+	        	this.addTodo( newTodoId, this.todo );
+	        	this.todo = '';
+    		});
+
+      	},
+
+      	update: function(todo) {      		
+      		this.$http.put('/todos/' + todo.id, todo);
+      	},
+
+      	deleteTodo: function(todo) {
+
+      		this.$http.delete('/todos/' + todo.id).then(function(){
+      			let index = this.todos.indexOf(todo);
+      			this.todos.splice( index, 1 );
+      		})
+      	}
     }
 
 })

@@ -28,6 +28,7 @@ class UserCanCreateTodoTest extends TestCase
 
         $res->assertStatus( Response::HTTP_CREATED );
         $res->assertJson([
+            "id" => 1,
             "code" => "200",
             "status" => "created",
             "links" => [

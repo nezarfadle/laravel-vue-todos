@@ -33,7 +33,7 @@ class TodosController extends Controller
 		try {
 		    
 		    $todo = $user->addTodo( $title );
-		    return new CreatedJsonResponse( 200, $todo->getUrl() );
+		    return new CreatedJsonResponse( $todo->getId(), 200, $todo->getUrl() );
 
     	} catch (\Exception $e) {
 
@@ -61,12 +61,13 @@ class TodosController extends Controller
     public function update($id, CreateTodoRequest $req)
     {
 
-        $title = $req->get('title');
+        // $title = $req->get('title');
         $user = auth()->user();
 
         try {
             
-            $user->updateTodo($id, $title);
+            // $user->updateTodo($id, $title);
+            $user->updateTodo($id, $req->all());
             return new NoContentJsonResponse();
 
         } catch (\Exception $e) {

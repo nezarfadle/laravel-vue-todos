@@ -15,29 +15,21 @@
 @extends('layout')
 @section('content')
 
-<section class="todoapp">
+<section class="todoapp" id="app">
 
 <header class="header">
 	<h1>Todos</h1>
-	<input class="new-todo" placeholder="What needs to be done?" autofocus>
+	<input class="new-todo" placeholder="What needs to be done?" autofocus v-model="todo" @keyup.enter="add">
 </header>
 
 <!-- This section should be hidden by default and shown when there are todos -->
-<section class="main" id="app">
+<section class="main">
 	<input class="toggle-all" type="checkbox">
 	<label for="toggle-all">Mark all as complete</label>
 	<ul class="todo-list">
 		
 		<li class="completed" v-for="todo in todos">
-
 			<todo-tile :todo="todo"></todo-tile>
-			{{-- <div class="view">
-				<input class="toggle" type="checkbox" checked>
-				<label>
-					<input type="text" class="text-todo" v-model="todo.title">
-				</label>
-				<button class="destroy"></button>
-			</div> --}}
 		</li>
 		
 	</ul>
@@ -45,7 +37,7 @@
 <!-- This footer should hidden by default and shown when there are todos -->
 <footer class="footer">
 	<!-- This should be `0 items left` by default -->
-	<span class="todo-count"><strong>0</strong> item left</span>
+	<span class="todo-count"><strong>@{{activeItems}}</strong> item left</span>
 	<!-- Remove this if you don't implement routing -->
 	<ul class="filters">
 		<li>

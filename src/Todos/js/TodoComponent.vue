@@ -1,10 +1,17 @@
 <template>
 	<div class="view">
-		<input class="toggle" type="checkbox" checked>
+		<input class="toggle" 
+			   type="checkbox" 
+			   v-model="todo.complete"
+			   @click="updateState(todo)"
+		>
 		<label>
-			<input type="text" class="text-todo" v-model="todo.title" @blur="lostFocus(todo)">
+			<input type="text" class="text-todo" 
+				   v-model="todo.title" 
+				   @blur="lostFocus(todo)"
+			>
 		</label>
-		<button class="destroy"></button>
+		<button class="destroy" @click="deleteTodo(todo)"></button>
 	</div>
 </template>
 
@@ -48,6 +55,14 @@
 		        	this.$bus.$emit('todo-title-changed', todo);
 		        }
 		        
+		    },
+
+		    updateState: function(todo) {
+		        this.$bus.$emit('todo-state-changed', todo);
+		    },
+
+		    deleteTodo: function(todo) {
+		        this.$bus.$emit('todo-delete', todo);
 		    }
 		}
 

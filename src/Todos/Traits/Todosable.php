@@ -29,12 +29,14 @@ trait Todosable
 			->delete();
 	}
 
-	public function updateTodo($id, $title)
+	// public function updateTodo($id, $title)
+	public function updateTodo($id, $all)
 	{
 		return $this->todos()
 					 ->where( 'id', $id )
 					 ->where( 'user_id', $this->id )
-					 ->update([ 'title' => $title ]);
+					 // ->update([ 'title' => $title ]);
+					 ->update($all);
 		
 		
 	}

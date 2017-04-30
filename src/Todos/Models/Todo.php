@@ -10,6 +10,13 @@ class Todo extends Model
     	'title', 'complete', 'user_id'
     ];
 
+    protected $hidden = [ 'user_id', 'created_at', 'updated_at' ];
+
+    public function getId()
+    {
+    	return $this->id;
+    }
+    
     public function getUrl()
     {
     	return "todos/$this->id";
