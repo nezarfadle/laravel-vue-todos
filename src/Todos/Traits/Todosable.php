@@ -30,7 +30,7 @@ trait Todosable
 
 	public function updateTodo($id, $data)
 	{
-		$todo = $this->todos()->where( 'id', $id )->first();
+		$todo = $this->todos()->find($id);
 		return $todo->fill($data)->update();	
 	}
 }

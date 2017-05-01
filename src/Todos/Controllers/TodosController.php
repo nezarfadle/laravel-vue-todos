@@ -61,12 +61,10 @@ class TodosController extends Controller
     public function update($id, CreateTodoRequest $req)
     {
 
-        // $title = $req->get('title');
         $user = auth()->user();
 
         try {
             
-            // $user->updateTodo($id, $title);
             $user->updateTodo($id, $req->all());
             return new NoContentJsonResponse();
 
