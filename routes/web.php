@@ -5,5 +5,5 @@
 Route::get('/', '\Todos\Controllers\TodosController@landing');
 Route::get('/todos', '\Todos\Controllers\TodosController@index');
 Route::post('/todos', '\Todos\Controllers\TodosController@store');
-Route::delete('/todos/{id}', '\Todos\Controllers\TodosController@destroy');
-Route::put('/todos/{id}', '\Todos\Controllers\TodosController@update');
+Route::put('/todos/{todo}', '\Todos\Controllers\TodosController@update');
+Route::delete('/todos/{todo}', '\Todos\Controllers\TodosController@destroy');

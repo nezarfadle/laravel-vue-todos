@@ -42,7 +42,7 @@ class UserCanDeleteTodoTest extends TestCase
          $id = 2;
          $res= $this->delete("todos/$id");
 
-         $res->assertStatus( Response::HTTP_NO_CONTENT );
+         $res->assertStatus( Response::HTTP_FORBIDDEN );
          $this->assertEquals( 2, Todo::count() );
 
       }

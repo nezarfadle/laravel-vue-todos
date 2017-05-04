@@ -25,6 +25,10 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('manage-todo', function ($user, $todo) {
+            return $user->id == $todo->user_id;
+        });
+
+
     }
 }

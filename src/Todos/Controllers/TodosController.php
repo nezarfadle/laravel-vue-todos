@@ -8,8 +8,10 @@ use SharedKernel\Http\CreatedJsonResponse;
 use SharedKernel\Http\NoContentJsonResponse;
 use Todos\Requests\CreateTodoRequest;
 use App\User;
+use Todos\Models\Todo;
 use \Todos\Queries\GetTweetsQuery;
-
+use Todos\Exceptions\ForbiddenAction;
+use \SharedKernel\Http\UnauthorizedActionJsonResponse;
 
 class TodosController extends Controller
 {
@@ -42,36 +44,45 @@ class TodosController extends Controller
     	}    	
     }
 
-    public function destroy( $id )
+    public function destroy( Todo $todo )
     {
 
     	try {
-    		
+    	   
     		$user = auth()->user();
-    		$user->deleteTodo($id);
+    		$user->deleteTodo($todo);
     		return new NoContentJsonResponse();
 
-    	} catch (\Exception $e) {
+    	} 
+        
+        catch (ForbiddenAction $e) {
+            return new UnauthorizedActionJsonResponse();
+        }
 
+        catch (\Exception $e) {
             return new JsonInternalServerError( 201 );
-
     	}
+
     }
 
-    public function update($id, CreateTodoRequest $req)
+    public function update( Todo $todo, CreateTodoRequest $req )
     {
 
         $user = auth()->user();
 
         try {
             
-            $user->updateTodo($id, $req->all());
+            $user->updateTodo($todo, $req->all());
             return new NoContentJsonResponse();
 
-        } catch (\Exception $e) {
+        } 
 
-            return new JsonInternalServerError( 202 );
+        catch (ForbiddenAction $e) {
+            return new UnauthorizedActionJsonResponse();
+        }
 
-        }   
+        catch (\Exception $e) {
+            return new JsonInternalServerError( 201 );
+        }
     }
 }

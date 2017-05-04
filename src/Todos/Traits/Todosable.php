@@ -3,6 +3,7 @@
 namespace Todos\Traits;
 
 use Todos\Models\Todo;
+use Todos\Exceptions\ForbiddenAction;
 
 trait Todosable
 {
@@ -20,17 +21,26 @@ trait Todosable
 		]);
 	}
 
-	public function deleteTodo($id)
+	public function deleteTodo(Todo $todo)
 	{
-		return $this->todos()
-			->where( 'id', $id )
-			->where( 'user_id', $this->id )
-			->delete();
+
+		if (\Gate::denies('manage-todo', $todo))
+        {
+            throw new ForbiddenAction();
+        }
+
+		$todo->delete();
 	}
 
-	public function updateTodo($id, $data)
+	public function updateTodo(Todo $todo, $data)
 	{
-		$todo = $this->todos()->find($id);
+		
+		if (\Gate::denies('manage-todo', $todo))
+        {
+            throw new ForbiddenAction();
+        }
+
 		return $todo->fill($data)->update();	
+
 	}
 }
