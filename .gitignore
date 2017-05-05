@@ -10,3 +10,4 @@ Homestead.yaml
 npm-debug.log
 tests/Browser/console
 tests/Browser/screenshots
+tests/_output/
