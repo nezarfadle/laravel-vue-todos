@@ -19,7 +19,7 @@
 
 <header class="header">
 	<h1>Todos</h1>
-	<input class="new-todo" placeholder="What needs to be done?" autofocus v-model="todo" @keyup.enter="add">
+	<input class="new-todo" id="title" name="title" placeholder="What needs to be done?" autofocus v-model="todo" @keyup.enter="add">
 </header>
 
 <!-- This section should be hidden by default and shown when there are todos -->

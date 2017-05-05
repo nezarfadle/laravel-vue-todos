@@ -23,7 +23,8 @@ trait CreateUser
 
     	dump(" ->" . $testName);
 
-    	factory(User::class)->create( [ 'id' => 1 ] );
-    	\Auth::loginUsingId(1);
+    	factory(User::class)->create( [ 'id' => 1, 'email' => 'user1@gmail.com' ] );
+        // \Auth::loginUsingId(1);
+    	auth()->loginUsingId(1);
     }
 }
