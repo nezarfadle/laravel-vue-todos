@@ -9,7 +9,7 @@ use SharedKernel\Http\NoContentJsonResponse;
 use Todos\Requests\CreateTodoRequest;
 use App\User;
 use Todos\Models\Todo;
-use \Todos\Queries\GetTweetsQuery;
+use \Todos\Queries\GetTodosQuery;
 use Todos\Exceptions\ForbiddenAction;
 use \SharedKernel\Http\UnauthorizedActionJsonResponse;
 
@@ -21,7 +21,7 @@ class TodosController extends Controller
 		return view("todos::landing");	
 	}
 
-    public function index(GetTweetsQuery $query)
+    public function index(GetTodosQuery $query)
     {
         return $query->get();
     }

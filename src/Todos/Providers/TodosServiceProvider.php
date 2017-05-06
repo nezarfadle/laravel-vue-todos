@@ -3,6 +3,7 @@
 namespace Todos\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Todos\Queries\GetTodosQuery;
 
 class TodosServiceProvider extends ServiceProvider
 {
@@ -24,5 +25,9 @@ class TodosServiceProvider extends ServiceProvider
     public function register()
     {
         \View::addNamespace('todos', base_path('src/Todos/Views'));
+
+        $this->app->singleton(GetTodosQuery::class, function ($app) {
+            return new GetTodosQuery(auth()->id());
+        });
     }
 }
