@@ -34,8 +34,8 @@ trait Todosable
 
 	public function deleteMultibleTodos($ids)
 	{
-		return Todo::whereIn('id', $ids)
-					->where('user_id', $this->id)
+		return Todo::where('user_id', $this->id)
+					->whereIn('id', $ids)
 					->delete();
 	}
 
