@@ -20,6 +20,19 @@ var filters = {
   }
 }
 
+var transformers = {
+    
+    activeToIds: function(todos) {
+
+      return todos.filter( todo => {
+          return todo.complete;
+      }).map( todo => {
+          return todo.id;
+      }).join(',');
+
+    }
+}
+
 new Vue({
 	el: '#app',
 	data: {
@@ -60,48 +73,57 @@ new Vue({
     	filteredTodos: function () {
 	      return filters[this.visibility](this.todos)
 	    },
+
     	activeItems: function() {
     		return this.todos.filter( (todo) => {
     			return !todo.complete;
     		}).length;
     	}
+
     },
     methods: {
     	add: function() {
     		
-    		let todo = {
-    			title: this.todo,
-    			complete: false
-    		};
+      		let todo = {
+      			title: this.todo,
+      			complete: false
+      		};
 
-    		this.$http.post('/todos', todo).then( function(res){
-    			let newTodoId = res.data.id;
-	        	this.addTodo( newTodoId, this.todo );
-	        	this.todo = '';
-    		});
+      		this.$http.post('/todos', todo).then( function(res){
+      			  let newTodoId = res.data.id;
+  	        	this.addTodo( newTodoId, this.todo );
+  	        	this.todo = '';
+      		});
 
-      	},
+      },
 
-      	update: function(todo) {      		
+      update: function(todo) {      		
       		this.$http.put('/todos/' + todo.id, todo);
-      	},
+      },
 
-      	deleteTodo: function(todo) {
-
+      deleteTodo: function(todo) {
       		this.$http.delete('/todos/' + todo.id).then(function(){
       			let index = this.todos.indexOf(todo);
       			this.todos.splice( index, 1 );
       		})
-      	},
+      },
 
-      	filterAll: function(e) {
+      deleteCompleted: function() {
+
+          let ids = transformers['activeToIds'](this.todos);
+          this.$http.delete('/todos/delete/multi?ids=' + ids).then( function(){
+              this.todos = filters['active'](this.todos);
+          });
+      },
+
+      filterAll: function(e) {
       		e.preventDefault();
       		this.visibility = 'all';
-      	},
+      },
 
-      	filterActive: function(e) {
+      filterActive: function(e) {
       		e.preventDefault();
-	    	this.visibility = 'active';
+	       	this.visibility = 'active';
 	    },
 
 	    filterCompleted: function(e) {

@@ -24,7 +24,7 @@ trait Todosable
 	public function deleteTodo(Todo $todo)
 	{
 
-		if (\Gate::denies('manage-todo', $todo))
+		if ($this->cannot('manage-todo', $todo))
         {
             throw new ForbiddenAction();
         }
@@ -32,10 +32,17 @@ trait Todosable
 		$todo->delete();
 	}
 
+	public function deleteMultibleTodos($ids)
+	{
+		return Todo::whereIn('id', $ids)
+					->where('user_id', $this->id)
+					->delete();
+	}
+
 	public function updateTodo(Todo $todo, $data)
 	{
 		
-		if (\Gate::denies('manage-todo', $todo))
+		if ($this->cannot('manage-todo', $todo))
         {
             throw new ForbiddenAction();
         }

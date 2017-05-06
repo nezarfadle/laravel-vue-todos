@@ -57,7 +57,7 @@
 		</li>
 	</ul>
 	<!-- Hidden if no completed items are left ↓ -->
-	<button class="clear-completed">Clear completed</button>
+	<button class="clear-completed" @click="deleteCompleted">Clear completed</button>
 </footer>
 </section>
 <footer class="info">

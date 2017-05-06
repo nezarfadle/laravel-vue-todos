@@ -3,7 +3,9 @@
 namespace Todos\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use SharedKernel\Http\JsonInternalServerError;
 use SharedKernel\Http\CreatedJsonResponse;
 use SharedKernel\Http\NoContentJsonResponse;
 use Todos\Requests\CreateTodoRequest;
@@ -64,6 +66,26 @@ class TodosController extends Controller
     	}
 
     }
+
+    public function destroyMultible(Request $req)
+    {
+        
+        $ids = explode("," , $req->query('ids', ''));
+
+        try {
+           
+            $user = auth()->user();
+            $user->deleteMultibleTodos($ids);
+            return new NoContentJsonResponse();
+
+        } 
+        
+        catch (\Exception $e) {
+            return new JsonInternalServerError( 201 );
+        }
+
+    }
+
 
     public function update( Todo $todo, CreateTodoRequest $req )
     {
