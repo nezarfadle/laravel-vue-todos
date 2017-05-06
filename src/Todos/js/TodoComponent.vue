@@ -9,6 +9,8 @@
 			<input type="text" class="text-todo" 
 				   v-model="todo.title" 
 				   @blur="lostFocus(todo)"
+				   ref="title"
+				   @keyup.enter="leave"
 			>
 		</label>
 		<button class="destroy" @click="deleteTodo(todo)"></button>
@@ -63,6 +65,10 @@
 
 		    deleteTodo: function(todo) {
 		        this.$bus.$emit('todo-delete', todo);
+		    },
+
+		    leave: function() {
+		    	this.$refs.title.blur();
 		    }
 		}
 
