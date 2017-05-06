@@ -9,6 +9,7 @@ class GetTweetsQuery
 
 	public function get()
 	{
-		return Todo::paginate(20);
+		$user = auth()->user();
+		return $user->todos()->paginate(20);
 	}
 }

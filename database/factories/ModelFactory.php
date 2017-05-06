@@ -29,7 +29,7 @@ $factory->define( Todos\Models\Todo::class, function (Faker\Generator $faker) {
 
     return [
         'title' => $faker->sentence,
-        'complete' => $faker->boolean,
+        'complete' => false,
         'user_id' => 1
     ];
 
