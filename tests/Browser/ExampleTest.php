@@ -59,10 +59,11 @@ class ExampleTest extends DuskTestCase
 
         });
     }
+    
     /**
      * @group foo
      */
-    public function test_user_can_filter_completed()
+    public function test_user_can_mark_todo_as_completed()
     {
 
         factory(User::class)->create( [ 'id' => 1, 'email' => 'user1@gmail.com' ] );
@@ -78,7 +79,7 @@ class ExampleTest extends DuskTestCase
                     ->waitFor('li.completed')
                     ->check('.todo-list > li:nth-child(1) .toggle')
                     ->check('.todo-list > li:nth-child(5) .toggle')
-                    ->pause(500)
+                    ->pause(1000)
             ;
 
             $this->assertDatabaseHas( 'todos', [ 'id' => 1, 'complete' => true ] );
