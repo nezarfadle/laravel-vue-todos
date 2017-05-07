@@ -17,7 +17,7 @@ class CreateTodosTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('title');
-            $table->boolean('complete');
+            $table->boolean('complete')->default(false);
             $table->integer('user_id')->unsigned();
             $table->timestamps();
         });

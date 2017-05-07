@@ -10,9 +10,6 @@ use Todos\Models\Todo;
 class UserCanDeleteTodoTest extends DuskTestCase
 {
     
-    /**
-     * @group foo
-     */
     public function test_user_can_delete_todo()
     {
         factory(User::class)->create( [ 'id' => 1, 'email' => 'user1@gmail.com' ] );

@@ -12,7 +12,7 @@ class UserCanUpdateTodoTest extends TestCase
 	
 	use CreateUser;
 
-    public function test_user_can_update_his_own_todo()
+    public function test_user_can_update_his_own_todo_only()
     {
  		
  		factory(Todo::class)->create( [ 'id' => 1, 'title' => 'todo 1' ] );   	    
@@ -47,7 +47,7 @@ class UserCanUpdateTodoTest extends TestCase
  		
     }
 
-    public function test_user_cannot_update_other_users_todos_be_injecting_user_id_in_the_request()
+    public function test_user_cannot_update_other_users_todos_by_injecting_a_user_id_in_the_request()
     {
 
         factory(\App\User::class)->create( [ 'id' => 2 ] );         

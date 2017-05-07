@@ -22,4 +22,9 @@ class Todo extends Model
     	return "todos/$this->id";
     }
 
+    public function getCompleteAttribute($value)
+    {
+        return (bool) $value;
+    }
+
 }

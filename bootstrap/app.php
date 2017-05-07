@@ -52,7 +52,7 @@ $app->singleton(
 |
 */
 
-$servers = ['dusk.localhost:8000'];
+$servers = ['dusk.localhost:8000', 'dusk.localhost:9090'];
 
 if (isset($_SERVER['HTTP_HOST']) && in_array($_SERVER['HTTP_HOST'], $servers)) {
 	putenv('DB_DATABASE=todos-dusk');
