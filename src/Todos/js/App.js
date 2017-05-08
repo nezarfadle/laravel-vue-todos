@@ -1,37 +1,9 @@
 import {} from './Bootstrap';
 import TodoComponent from './TodoComponent.vue';
+import filters from './Filters.js'
+import transformers from './Transformers.js'
 
 Vue.component('todo-tile', TodoComponent);
-
-// visibility filters
-var filters = {
-  all: function (todos) {
-    return todos
-  },
-  active: function (todos) {
-    return todos.filter(function (todo) {
-      return !todo.complete
-    })
-  },
-  completed: function (todos) {
-    return todos.filter(function (todo) {
-      return todo.complete
-    })
-  }
-}
-
-var transformers = {
-    
-    activeToIds: function(todos) {
-
-      return todos.filter( todo => {
-          return todo.complete;
-      }).map( todo => {
-          return todo.id;
-      }).join(',');
-
-    }
-}
 
 new Vue({
 	el: '#app',

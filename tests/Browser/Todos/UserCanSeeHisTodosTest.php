@@ -9,9 +9,7 @@ use Todos\Models\Todo;
 
 class UserCanSeeHisTodosTest extends DuskTestCase
 {
-    /**
-     * @group foo
-     */
+   
     public function test_user_can_see_his_todos()
     {
 
