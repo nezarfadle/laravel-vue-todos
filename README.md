@@ -16,7 +16,7 @@ Using:
 ```
 git clone https://github.com/nezarfadle/laravel-vue-todos.git
 cd laravel-vue-todos
-chmode +x install.sh
+chmod +x install.sh
 ./install.sh
 ```
 
