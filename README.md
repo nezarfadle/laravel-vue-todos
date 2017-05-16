@@ -7,9 +7,11 @@ Using:
 
 # Installtion
 
-* Create a new Mysql databsae and name it ```todos```, And then open the .env file and set the databsae crendetials.
+* Create a new Mysql databsae and name it ```todos``` and set the databsae crendetials in .env file .
 
-* Create a database in Mysql and name it ```todos-dusk```, To override this name open the file ```bootstrap/app.php``` and go to the line no ```58``` and set the new database name, And then open the ```.env.dusk.local``` file and set the databsae crendetials.
+* Create a database in Mysql and name it ```todos-dusk``` and set the databsae crendetials in ```.env.dusk.local``` file.
+
+To overwrite this name open the ```bootstrap/app.php``` file and go to the line no ```58``` and set the new database name.  
 
 * Run the installtion script:
 
