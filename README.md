@@ -7,7 +7,7 @@ Using:
 
 # Installtion
 
-* Create a new Mysql databsae and name it ```todos``` and set the databsae crendetials in .env file .
+* Create a new Mysql databsae and name it ```todos``` and set the databsae crendetials in ```.env``` file .
 
 * Create a database in Mysql and name it ```todos-dusk``` and set the databsae crendetials in ```.env.dusk.local``` file.
 
