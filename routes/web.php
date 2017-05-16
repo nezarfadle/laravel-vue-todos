@@ -1,9 +1,6 @@
 <?php
 
-// \Auth::loginusingid(1);
-
 Auth::routes();
-Route::get('/home', 'HomeController@index');
 
 Route::group( ['middleware' => 'auth'], function(){
 
@@ -13,5 +10,6 @@ Route::group( ['middleware' => 'auth'], function(){
 	Route::put('todos/{todo}', '\Todos\Controllers\TodosController@update');
 	Route::delete('todos/{todo}', '\Todos\Controllers\TodosController@destroy');
 	Route::delete('todos/delete/multi', '\Todos\Controllers\TodosController@destroyMultible');
+	Route::get('logout', 'Auth\LoginController@logout');
 
 });

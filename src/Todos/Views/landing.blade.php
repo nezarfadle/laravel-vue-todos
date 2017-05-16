@@ -1,17 +1,3 @@
-<style type="text/css">
-/*
-.text-todo {
-	padding: 10px;
-	width: 100%;
-	border: 0px;
-}
-
-.text-todo:focus {
-	background-color: #f0f4c3;
-	border: 1px;
-}
-*/
-</style>
 @extends('layout')
 @section('content')
 
@@ -63,9 +49,8 @@
 <footer class="info">
 <p>Template by <a href="http://sindresorhus.com">Sindre Sorhus</a></p>
 <p>
-<a href="https://github.com/tastejs/todomvc-app-template/">
-Template on Github
-</a>
+<a href="https://github.com/tastejs/todomvc-app-template/">Template on Github</a> | 
+<a href="{{route('logout')}}">Logout</a>
 </p>
 </footer>
 
