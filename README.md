@@ -11,7 +11,7 @@
 
 * Create a new database in Mysql ( for dusk tests ) and name it ```todos-dusk``` and set the databsae crendetials in ```.env.dusk.local``` file, To overwrite this name open the ```bootstrap/app.php``` file and go to the line no ```58``` and set the new database name.  
 
-* Run the installtion script:
+* Run the installation script:
 
 ```
 git clone https://github.com/nezarfadle/laravel-vue-todos.git
