@@ -7,6 +7,8 @@
 
 ### Installtion
 
+* I will assume that ```npm``` and ```composer``` already installed on your compouter.
+
 * Create a new Mysql databsae and name it ```todos``` and set the databsae crendetials in ```.env``` file .
 
 * Create a new database in Mysql ( for dusk tests ) and name it ```todos-dusk``` and set the databsae crendetials in ```.env.dusk.local``` file, To overwrite this name open the ```bootstrap/app.php``` file and go to the line no ```58``` and set the new database name.  
