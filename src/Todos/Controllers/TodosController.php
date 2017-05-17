@@ -81,7 +81,7 @@ class TodosController extends Controller
         } 
         
         catch (\Exception $e) {
-            return new JsonInternalServerError( 201 );
+            return new JsonInternalServerError( 202 );
         }
 
     }
@@ -104,7 +104,7 @@ class TodosController extends Controller
         }
 
         catch (\Exception $e) {
-            return new JsonInternalServerError( 201 );
+            return new JsonInternalServerError( 203 );
         }
     }
 }
