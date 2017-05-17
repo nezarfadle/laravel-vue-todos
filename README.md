@@ -1,6 +1,6 @@
-# Yet Another Todos App
+# Yet Another Todos App #
 
-### Using
+### Using 
 
 * Laravel
 * Vuejs
@@ -30,3 +30,12 @@ chmod +x install.sh
 phpunit
 php artisan dusk
 ```
+
+### License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+
+### Credit
+
+Template by [Sindre Sorhus](http://sindresorhus.com) 
+Template on Github [https://github.com/tastejs/todomvc-app-template/](https://github.com/tastejs/todomvc-app-template/) 
