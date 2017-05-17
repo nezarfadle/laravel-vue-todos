@@ -37,5 +37,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### Credit
 
-Template by [Sindre Sorhus](http://sindresorhus.com) 
+Template by [Sindre Sorhus](http://sindresorhus.com)  
 Template on Github [https://github.com/tastejs/todomvc-app-template/](https://github.com/tastejs/todomvc-app-template/) 
