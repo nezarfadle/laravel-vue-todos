@@ -31,11 +31,13 @@ class TodosController extends Controller
     public function store(CreateTodoRequest $req)
     {
 		
-		$title 	= $req->get( 'title' );
-		$user 	= auth()->user();
+		
 		
 		try {
 		    
+            $title  = $req->get( 'title' );
+            $user   = auth()->user();
+
 		    $todo = $user->addTodo( $title );
 		    return new CreatedJsonResponse( $todo->getId(), 200, $todo->getUrl() );
 
@@ -70,10 +72,11 @@ class TodosController extends Controller
     public function destroyMultible(Request $req)
     {
         
-        $ids = explode("," , $req->query('ids', ''));
 
         try {
            
+            $ids = explode("," , $req->query('ids', ''));
+
             $user = auth()->user();
             $user->deleteMultibleTodos($ids);
             return new NoContentJsonResponse();
@@ -90,9 +93,10 @@ class TodosController extends Controller
     public function update( Todo $todo, CreateTodoRequest $req )
     {
 
-        $user = auth()->user();
 
         try {
+            
+            $user = auth()->user();
             
             $user->updateTodo($todo, $req->all());
             return new NoContentJsonResponse();

@@ -12,9 +12,8 @@ class UserCanAddTodoTest extends DuskTestCase
     
     public function test_user_can_add_todo()
     {
-
         factory( User::class )->create( [ 'id' => 1, 'email' => 'user1@gmail.com' ] );
-        $this->assertDatabaseMissing( 'todos', [ 'title' => 'todo 1'] );
+        $this->assertDatabaseMissing( 'todos', [ 'title' => 'todo 1' ]);
 
         $this->browse( function ( Browser $browser ) {
             
