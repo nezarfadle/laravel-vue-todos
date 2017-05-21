@@ -13,13 +13,9 @@ new Vue({
 		visibility: 'all'
 	},
 	created: function(){
-    		
-        this.makeTodo = (id, title) => {
-          return { id: id, title: title, complete: false };
-        },
-        
-        this.addTodo = (id, title) => {
-        	if( title ) this.todos.push( this.makeTodo(id, title) );  	
+    
+        this.addTodo = (todo) => {
+        	this.todos.push( todo );  	
         }
         
         this.$bus.$on('todo-state-changed', todo => {
@@ -62,19 +58,18 @@ new Vue({
       		};
 
       		this.$http.post('/todos', todo).then( function(res){
-      			  let newTodoId = res.data.id;
-  	        	this.addTodo( newTodoId, this.todo );
+  	        	this.addTodo( res.data.todo );
   	        	this.todo = '';
       		});
 
       },
 
       update: function(todo) {      		
-      		this.$http.put('/todos/' + todo.id, todo);
+      		this.$http.put( todo.href, todo);
       },
 
       deleteTodo: function(todo) {
-      		this.$http.delete('/todos/' + todo.id).then(function(){
+      		this.$http.delete( todo.href ).then(function(){
       			let index = this.todos.indexOf(todo);
       			this.todos.splice( index, 1 );
       		})
@@ -83,7 +78,7 @@ new Vue({
       deleteCompleted: function() {
 
           let ids = transformers['activeToIds'](this.todos);
-          this.$http.delete('/todos/delete/multi?ids=' + ids).then( function(){
+          this.$http.delete('/todos/mark/completed?ids=' + ids).then( function(){
               this.todos = filters['active'](this.todos);
           });
       },

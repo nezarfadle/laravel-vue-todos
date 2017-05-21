@@ -27,7 +27,7 @@ class UserCanDeleteMultibleTodosTest extends TestCase
      		$this->assertDatabaseHas('todos', [ 'id' => 4 ]);
      		$this->assertDatabaseHas('todos', [ 'id' => 5 ]);
 
-        $res= $this->delete("todos/delete/multi?ids=1,2,6");
+        $res= $this->delete("todos/mark/completed?ids=1,2,6");
         
         $res->assertStatus( Response::HTTP_NO_CONTENT );
         $this->assertDatabaseMissing('todos', [ 'id' => 1 ]);

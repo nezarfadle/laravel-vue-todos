@@ -10,6 +10,6 @@ Route::group( ['middleware' => 'auth'], function(){
 	Route::post('todos', '\Todos\Controllers\TodosController@store');
 	Route::put('todos/{todo}', '\Todos\Controllers\TodosController@update');
 	Route::delete('todos/{todo}', '\Todos\Controllers\TodosController@destroy');
-	Route::delete('todos/delete/multi', '\Todos\Controllers\TodosController@destroyMultible');
+	Route::delete('todos/mark/completed', '\Todos\Controllers\TodosController@completed');
 
 });

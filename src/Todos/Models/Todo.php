@@ -9,9 +9,9 @@ class Todo extends Model
     protected $fillable = [
     	'title', 'complete'
     ];
-
     protected $hidden = [ 'user_id', 'created_at', 'updated_at' ];
-
+    protected $appends = ['href'];
+    
     public function getId()
     {
     	return $this->id;
@@ -25,6 +25,11 @@ class Todo extends Model
     public function getCompleteAttribute($value)
     {
         return (bool) $value;
+    }
+
+    public function getHrefAttribute()
+    {
+        return "/todos/{$this->id}";
     }
 
 }

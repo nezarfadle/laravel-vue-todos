@@ -28,13 +28,11 @@ class UserCanCreateTodoTest extends TestCase
 
         $res->assertStatus( Response::HTTP_CREATED );
         $res->assertJson([
-            "id" => 1,
+            "todo" => [ "id" => 1 ],
             "code" => "200",
-            "status" => "created",
-            "links" => [
-                'href' => env('APP_URL') . 'todos/1'
-            ]
+            "status" => "created"
         ]);
+
     	$this->assertDatabaseHas( 'todos', $dbData );
 
     }
@@ -73,12 +71,9 @@ class UserCanCreateTodoTest extends TestCase
 
         $res->assertStatus( Response::HTTP_CREATED );
         $res->assertJson([
-            "id" => 1,
+            "todo" =>  [ "id" => 1 ],
             "code" => "200",
             "status" => "created",
-            "links" => [
-                'href' => env('APP_URL') . 'todos/1'
-            ]
         ]);
         $this->assertDatabaseHas( 'todos', $dbData );
         $this->assertDatabaseMissing( 'todos', [ 'title' => $todoTitle, 'user_id' => 2 ] );

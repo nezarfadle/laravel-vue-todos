@@ -21,11 +21,9 @@ class UserCanRetrieveHisTodosTest extends TestCase
         $res->assertStatus(200)
             ->assertJsonStructure( 
                 [ 'data' => [
-                    [ 'id', 'title' ] 
+                    [ 'id', 'title', 'href' ] 
                 ]] 
             );
-        
-
     }
 
     public function test_user_can_retrieve_his_todos()
